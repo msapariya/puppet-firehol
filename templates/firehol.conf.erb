@@ -1,0 +1,18 @@
+#
+# WARNING: This file is managed by puppet - any local changes will be overwritten
+#
+
+version 5
+
+FIREHOL_INTERFACES=/etc/firehol/interfaces/*.conf
+FIREHOL_SERVICES=/etc/firehol/simple_services/*.conf
+
+for SERVICE_CONF in ${FIREHOL_SERVICES}
+do
+   [ -f ${SERVICE_CONF} ] && source ${SERVICE_CONF}
+done
+
+for INTERFACE_CONF in ${FIREHOL_INTERFACES}
+do
+   [ -f ${INTERFACE_CONF} ] && source ${INTERFACE_CONF}
+done

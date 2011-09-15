@@ -1,0 +1,47 @@
+puppet-firehol
+==============
+
+puppet module to manage firehol
+
+WARNING: this module will completely wipe out any previous firehol
+configuration as well as any files in /etc/firehol not that are not managed by
+puppet
+
+generates a tree of configuration files in /etc/firehol for interfaces and
+services.
+
+usage
+=====
+
+firehol::interface { "eth0":
+	policy => "accept",
+	interface_alias => "lan",
+	sources => ["192.168.0.0/16"],
+}
+
+firehol::interface { "eth1":
+	policy => "drop",
+	interface_alias => "internet",
+	not_sources => ["192.168.0.0/16"],
+}
+
+firehol::server { "lan-ssh":
+	service_name => "ssh",
+	interface_name => "eth0",
+	policy => "accept",
+}
+
+todo
+====
+
+- need to sort out a better solution for allowing all outbound client connections
+  on an interface
+- more testing on various distributions
+- the "status" action for the service isn't reliable - puppet will refresh the
+  service on each run
+
+caveats
+=======
+
+- firehol isn't widely available in distribution package repositories - for
+  RHEL, at least.

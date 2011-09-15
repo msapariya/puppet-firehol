@@ -1,0 +1,15 @@
+#
+# WARNING: This file is managed by puppet - any local changes will be overwritten
+#
+
+interface <%= interface_name %> <%= interface_alias -%>
+<% if sources.length > 0 -%> src "<%= sources.join(" ") -%>"<% end -%>
+<% if not_sources.length > 0 -%> src not "<%= not_sources.join(" ") -%>"<% end %>
+   policy <%= policy %>
+
+   for SERVICE_CONF in /etc/firehol/interfaces/<%= interface_name %>/*.conf
+   do
+      [ -f ${SERVICE_CONF} ] && source ${SERVICE_CONF}
+   done
+
+   client all accept
