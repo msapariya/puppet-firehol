@@ -71,7 +71,7 @@ class firehol {
    }
 }
 
-define firehol::interface ($interface_alias, $policy="accept", sources=[], not_sources=[]) {
+define firehol::interface ($interface_alias, $policy="accept", $sources=[], $not_sources=[]) {
    include firehol
 
    $interface_name = $name
@@ -109,7 +109,7 @@ define firehol::interface ($interface_alias, $policy="accept", sources=[], not_s
    }
 }
 
-define firehol::server ($service_name, $interface_name, $policy="accept", sources=[]) {
+define firehol::server ($service_name, $interface_name, $policy="accept", $sources=[]) {
    include firehol
 
    file { "$firehol::firehol_interfaces/$interface_name/server_$service_name.conf":
@@ -126,7 +126,7 @@ define firehol::server ($service_name, $interface_name, $policy="accept", source
    }
 }
 
-define firehol::client ($service_name, $interface_name, $policy="accept", sources=[]) {
+define firehol::client ($service_name, $interface_name, $policy="accept", $sources=[]) {
    include firehol
 
    file { "$firehol::firehol_interfaces/$interface_name/client_$service_name.conf":

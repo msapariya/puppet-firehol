@@ -2,4 +2,6 @@
 # WARNING: This file is managed by puppet - any local changes will be overwritten
 #
 
-server <%= service_name %> <%= policy %>
+server <%= service_name %> <%= policy -%>
+<% if sources.length > 0 -%> src "<%= sources.join(" ") -%>"<% end -%>
+
